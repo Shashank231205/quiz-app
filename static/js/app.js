@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     const achievementNotes = [
-        "Achievement Unlocked: Quantum Thinker! You operate on a higher frequency. [LOGO:/static/images/logo.png]🌟",
+        "Achievement Unlocked: Quantum Thinker! You operate on a higher frequency. [LOGO:/static/ilogo.png]🌟",
         "Achievement Unlocked: Algorithm Architect! You design flawless logic. [LOGO:/static/images/logo.png] 🚀",
         "Achievement Unlocked: Neural Navigator! You navigate the complexities of thought. [LOGO:/static/images/logo.png]✨",
         "Achievement Unlocked: Data Dynamo! Your energy for information is limitless. [LOGO:/static/images/logo.png] 💡",
