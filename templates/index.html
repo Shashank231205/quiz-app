@@ -9,15 +9,14 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&display=swap" rel="stylesheet">
 
-  <!-- Your existing styles (keep if you have extra rules there) -->
+  <!-- Your existing styles -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
-  <!-- CropperJS (unchanged) -->
+  <!-- CropperJS (if needed for other features, otherwise can be removed) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
 
   <style>
-    /* === Copied/Adapted from AI IP Leak Detector === */
     @font-face {
       font-family: 'FranciaTrial';
       src: url('{{ url_for("static", filename="FranciATRIAL-Regular-BF65728e8645413.otf") }}') format('opentype');
@@ -74,7 +73,6 @@
       text-transform: uppercase;
     }
 
-    /* Optional helpers to match your gold/box vibe */
     .card-bg {
       background-color: rgba(161, 117, 49, 0.1);
       border: 1px solid #BC8A4B;
@@ -92,39 +90,43 @@
       transform: translateY(-3px) scale(1.02);
       box-shadow: 0 6px 30px rgba(188, 138, 75, 0.7);
     }
+
+    #copy-status-text {
+        color: #F5C079; /* Gold color to match theme */
+        font-weight: bold;
+        min-height: 1.2em; /* Prevents layout shift */
+        display: block;
+        margin-top: 0.75rem;
+    }
   </style>
 </head>
 
 <body>
-  <!-- Same header box as your AI IP Leak Detector -->
+  <!-- Hidden Canvas for generating the shareable result image -->
+  <canvas id="result-canvas" style="display: none;"></canvas>
+
+  <!-- Header -->
   <div class="header-bar">
-    <!-- Use your existing white-text logo file; change to 'logo.png' if you prefer -->
     <img src="{{ url_for('static', filename='logo.png') }}" alt="arenesha logo" class="logo-hover transition-all duration-300 ease-in-out">
     <p>AI LABS</p>
   </div>
 
   <main class="container mx-auto py-6 md:py-10">
     <!-- Start Screen -->
-    <!-- Start Screen -->
-<div id="start-screen" class="max-w-xl mx-auto card-bg rounded-2xl p-8 text-center" data-state="active">
-  <h1 class="text-3xl font-bold mb-4" style="color:#BC8A4B;">AIQ: The Adorable Intelligence Quiz 🤖</h1>
-  <p class="text-gray-300 mb-6">
-    Enter your name to start the quiz. <br>
-    You have 30 seconds for each round. Let's go!
-  </p>
-
-  <!-- Name input -->
-  <input type="text" id="player-name"
-         class="w-full mb-4 p-3 rounded-xl bg-gray-900 border border-gray-600 text-white focus:outline-none"
-         placeholder="Enter your name..." required>
-
-  <button id="start-btn"
-          class="px-6 py-3 rounded-xl font-bold btn-gold w-full md:w-auto">
-    Start the Challenge
-  </button>
-</div>
-
-
+    <div id="start-screen" class="max-w-xl mx-auto card-bg rounded-2xl p-8 text-center" data-state="active">
+      <h1 class="text-3xl font-bold mb-4" style="color:#BC8A4B;">AIQ: The Adorable Intelligence Quiz 🤖</h1>
+      <p class="text-gray-300 mb-6">
+        Enter your name to start the quiz. <br>
+        You have 30 seconds for each round. Let's go!
+      </p>
+      <input type="text" id="player-name"
+             class="w-full mb-4 p-3 rounded-xl bg-gray-900 border border-gray-600 text-white focus:outline-none"
+             placeholder="Enter your name..." required>
+      <button id="start-btn"
+              class="px-6 py-3 rounded-xl font-bold btn-gold w-full md:w-auto">
+        Start the Challenge
+      </button>
+    </div>
 
     <!-- Quiz Screen -->
     <div id="quiz-screen" class="max-w-xl mx-auto card-bg rounded-2xl p-8 mt-8" data-state="inactive">
@@ -136,7 +138,7 @@
         </div>
       </div>
       <div class="w-full bg-gray-700 rounded-full h-2 mb-6">
-        <div id="timer-progress" class="h-2 rounded-full" style="background-color:#BC8A4B; width:0"></div>
+        <div id="timer-progress" class="h-2 rounded-full" style="background-color:#BC8A4B; width:100%"></div>
       </div>
       <h2 id="question-text" class="text-xl font-semibold mb-6">Question goes here...</h2>
       <div id="options-container" class="grid gap-3"></div>
@@ -151,9 +153,18 @@
       <div class="mt-6 p-4 rounded-xl bg-gray-800">
         <p id="horoscope-text" class="text-sm text-gray-400">Your digital horoscope is being calculated...</p>
       </div>
-      <button id="restart-btn" class="mt-6 px-6 py-3 rounded-xl font-bold btn-gold w-full md:w-auto">
-        Play Again
-      </button>
+
+      <!-- Action Buttons -->
+      <div class="mt-6 flex flex-col md:flex-row gap-4">
+        <button id="share-linkedin-btn" class="px-6 py-3 rounded-xl font-bold btn-gold w-full">
+          Share on LinkedIn
+        </button>
+        <button id="restart-btn" class="px-6 py-3 rounded-xl font-bold btn-gold w-full">
+          Play Again
+        </button>
+      </div>
+      <span id="copy-status-text"></span>
+
     </div>
   </main>
 
