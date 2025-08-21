@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "Achievement Unlocked: Algorithm Architect! You design flawless logic. [LOGO:/static/logo.png] 🚀",
         "Achievement Unlocked: Neural Navigator! You navigate the complexities of thought. [LOGO:/static/logo.png]✨",
         "Achievement Unlocked: Data Dynamo! Your energy for information is limitless. [LOGO:/static/logo.png] 💡",
-        "Achievement Unlocked: Logic Master! Your reasoning is undeniable. [LOGO:/staticlogo.png] 🤖",
+        "Achievement Unlocked: Logic Master! Your reasoning is undeniable. [LOGO:/static/logo.png] 🤖",
         "Achievement Unlocked: Byte-Sized Brainiac! You pack a punch of intelligence. [LOGO:/static/logo.png]🧠",
         "Achievement Unlocked: Processor Prodigy! You think at lightning speed. [LOGO:/static/logo.png]💻",
         "Achievement Unlocked: Syntax Seeker! You find order in chaos. [LOGO:/static/logo.png] 📈",
